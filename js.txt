@@ -1,0 +1,12 @@
+﻿主流浏览器：IE Chrome firefox Opera Safari 
+内核：trident   webkit/blink Gecko presto webkit
+尽量单一var定义变量
+变量名必须以英文字母、下划线、$开头
+变量名可以包括英文字母、下划线、$、数字
+不可以用系统关键字、保留字作为变量名
+原始值：Number Boolean String undefined null
+stack 栈 有底没顶 内存是拷贝 互不影响
+引用值：array function Object
+heap 堆 栈里面放的是堆的地址 拷贝的也是地址 
+for循环括号内只写一句 则与while语句相同
+do while语句用处不大（必执行一次循环体）
