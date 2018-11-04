@@ -1,0 +1,69 @@
+﻿Ajax是异步的JS和XML
+步骤：
+创建ajax请求；发出http请求；收到服务器传回的消息；更新网页数据。
+也就是：ajax通过原生的XMLHttpRequest对象发出HTTP请求，得到服务器返回的数据后，再进行处理。
+XMLHttpRequest对象 简称XHR
+使用：
+创建xhr对象；xhr.open()---创建http请求；xhr.send（）---发出http请求；接受到响应结果。
+创建xhr：
+var xhr = new XMLHttpRequest();//现代浏览器
+var xhr = new ActiveXObject("Microsoft.XMLHTTP");//ie5,ie6
+兼容写法：
+var xhr;
+if (window.XMLHttpRequest){
+xhr = new XMLHttpRequest();
+}else{
+xhr = new ActiveXObject('Microsoft.XMLHTTP')
+}
+
+xhr.open()
+open方法--------处于open状态，进行初始化；
+xhr.open("get","test.jsp","true");
+1.请求类型；-------掌握get和post的区别；
+2.请求地址；-------掌握url的带参表示方法，设置【请求头】--open之后，send之前
+3.异步和同步。-----了解异步和同步的区别。
+
+get和post的区别
+get：HTTP包头，明文，不安全，长度较小，应用于查询数据；
+post：HTTP正文，可明可密，数据安全，支持较大数据传输，用于修改数据。
+
+xhr.send()
+get方法时，填入null，post则需要写入发送的数据。
+
+readyState的值
+0：请求未初始化，还没有调用 open()。 
+1：请求已经建立，但是还没有发送，还没有调用 send()。 
+2：请求已发送，send()已调用，还未接收到响应。
+3：请求在处理中；通常响应中已有部分数据可用了，没有全部完成。 
+4：响应已完成；您可以获取并使用服务器的响应了。
+
+代码块：
+doucument.getElementById("search").onclick = function(){
+//发送Ajax查询请求并处理
+var request = new XMLHttpRequest();
+request.open("GET","service.php?number="+document.getElementById("keyword").value);
+request.onreadystatechange = function(){
+if(request.readyState === 4){
+if(request.status === 200){
+document.getElementById("searchResult").innerHTML = request.responseText;
+}else{
+alert("发生错误：" + request.status);
+}
+}
+}
+}
+
+jquery的ajax
+$.ajax({
+url:"", //请求的url地址
+dataType:"json", //返回格式为json
+async:true,//请求是否异步，默认为异步，这也是ajax重要特性
+data:{"id":"value"}, //参数值,键值对
+type:"GET", //请求方式
+success:function(req){
+//请求成功时处理
+},
+error:function(){
+//请求出错处理
+}
+});
